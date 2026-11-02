@@ -150,6 +150,20 @@ def two_layer_net():
 # =============================================================================
 # Q2.3: Numerical gradient check
 # =============================================================================
+# Not implemented — understanding only.
+#
+# Algorithm (my words): run multiple forward passes, each time adding/subtracting
+# delta to a single variable, to approximate the gradients (dW1 etc.), then check
+# these against the result from backpropagation.
+#
+# Notes:
+# - For each single entry of each parameter: nudge +delta -> forward -> loss L+,
+#   nudge -delta -> forward -> loss L-, restore it. Gradient ~ (L+ - L-) / (2*delta).
+# - Differentiate the loss (not just pred), since backward now starts from the MSE.
+# - Cost: 97 parameter entries x 2 = 194 forward passes. Backprop gets all of them
+#   from 1 forward + 1 backward -> too slow to train with, but a good test.
+# - Compare with np.max(np.abs(numerical - analytical)): ~1e-8 or smaller = correct,
+#   ~1e-2 = bug.
 
 def gradient_check():
     # TODO: Verify your implementation above numerically (Q2.3)
